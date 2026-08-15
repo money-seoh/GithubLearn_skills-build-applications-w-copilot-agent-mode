@@ -7,14 +7,14 @@ import { Activity, LeaderboardEntry, Team, User, Workout } from './models/index.
 const app = express()
 const port = Number(process.env.PORT ?? 8000)
 const mongoUri = process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/octofit_db'
-const codespaceNAME = process.env.CODESPACE_NAME
-const baseUrl = codespaceNAME
-  ? `https://${codespaceNAME}-8000.app.github.dev`
+const codespaceName = process.env.CODESPACE_NAME
+const baseUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
   : `http://localhost:${port}`
 const allowedOrigins = [
   'http://localhost:5173',
   'http://127.0.0.1:5173',
-  ...(codespaceNAME ? [`https://${codespaceNAME}-5173.app.github.dev`] : []),
+  ...(codespaceName ? [`https://${codespaceName}-5173.app.github.dev`] : []),
 ]
 
 const routeHandlers = {
