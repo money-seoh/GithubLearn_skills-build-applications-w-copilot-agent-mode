@@ -15,9 +15,10 @@ export function normalizeCollection(payload) {
   if (Array.isArray(payload?.data?.docs)) return payload.data.docs
   return []
 }
-export async function fetchCollection(resource) {
-  const response = await fetch(getApiUrl(resource))
+export async function fetchEndpoint(endpoint, resource) {
+  const response = await fetch(endpoint)
   if (!response.ok) throw new Error(`Unable to load ${resource} (${response.status})`)
   return normalizeCollection(await response.json())
 }
 export const apiConfiguration = { baseUrl: apiBaseUrl, isCodespaces: Boolean(codespaceName) }
+export { apiBaseUrl }
