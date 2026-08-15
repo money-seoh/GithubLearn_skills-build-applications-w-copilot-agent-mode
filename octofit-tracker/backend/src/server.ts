@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 
 import { connectDatabase } from './config/database.js'
 import { Activity, LeaderboardEntry, Team, User, Workout } from './models/index.js'
@@ -10,6 +11,11 @@ const codespaceNAME = process.env.CODESPACE_NAME
 const baseUrl = codespaceNAME
   ? `https://${codespaceNAME}-8000.app.github.dev`
   : `http://localhost:${port}`
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  ...(codespaceNAME ? [`https://${codespaceNAME}-5173.app.github.dev`] : []),
+]
 
 const routeHandlers = {
   users: '/api/users/',
@@ -20,6 +26,7 @@ const routeHandlers = {
 } as const
 
 app.use(express.json())
+app.use(cors({ origin: allowedOrigins }))
 
 app.get('/api/health', (_request, response) => {
   response.json({ status: 'ok', baseUrl, mongoUri })
