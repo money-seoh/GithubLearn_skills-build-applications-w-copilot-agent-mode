@@ -3,8 +3,9 @@
 ## API configuration
 
 The frontend reads `VITE_CODESPACE_NAME` through `import.meta.env` to build the
-Codespaces API URL: `https://$VITE_CODESPACE_NAME-8000.app.github.dev`. Define
-it in `octofit-tracker/frontend/.env.local` when using the hosted backend:
+Codespaces API URL: `https://$VITE_CODESPACE_NAME-8000.app.github.dev`. The
+`VITE_CODESPACE_NAME` variable must be defined in
+`octofit-tracker/frontend/.env.local` when using the hosted backend:
 
 ```dotenv
 VITE_CODESPACE_NAME=your-codespace-name
